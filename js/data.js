@@ -5,7 +5,7 @@
 const CATEGORIES = [
   { id: 'Frutas',   count: 0, img: 'https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?w=400&q=80' },
   { id: 'Verduras', count: 0, img: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&q=80' },
-  { id: 'Lácteos',  count: 0, img: 'https://images.unsplash.com/photo-1567188040759-fb8a883dc6d6?w=400&q=80' },
+  { id: 'Lácteos',  count: 0, img: 'https://plus.unsplash.com/premium_photo-1682129071833-65eed17bcf11?w=400&q=80' },
   { id: 'Granos',   count: 0, img: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&q=80' },
   { id: 'Hierbas',  count: 0, img: 'https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=400&q=80' }
 ];
