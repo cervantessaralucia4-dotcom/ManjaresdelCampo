@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Manjares del Campo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/admin.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+</head>
+<body>
+
+<!-- ===================== LOGIN ===================== -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-card">
+    <div class="login-logo">CV</div>
+    <div class="login-title">Panel Administrador</div>
+    <div class="login-sub">Manjares del Campo — Acceso restringido</div>
+    <input type="password" id="adminPass" class="login-input" placeholder="Contraseña de acceso" />
+    <div id="loginError" class="login-error"></div>
+    <button class="login-btn" onclick="adminLogin()">Ingresar</button>
+    <p style="font-size:.72rem;color:#bbb;margin-top:1rem">¿Olvidaste la contraseña? Contacta al desarrollador.</p>
+  </div>
+</div>
+
+<!-- ===================== ADMIN LAYOUT ===================== -->
+<div class="admin-layout hidden" id="adminLayout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar__brand">
+      <div class="sidebar__logo-row">
+        <div class="sidebar__logo">CV</div>
+        <div>
+          <div class="sidebar__name">Manjares del Campo</div>
+          <div class="sidebar__sub">ADMIN PANEL</div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="sidebar__nav">
+      <div class="sidebar__label">Principal</div>
+      <div class="sidebar__item active" data-panel="dashboard" onclick="showPanel('dashboard')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        <span>Dashboard</span>
+      </div>
+      <div class="sidebar__item" data-panel="pedidos" onclick="showPanel('pedidos')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span>Pedidos</span>
+      </div>
+
+      <div class="sidebar__label">Tienda</div>
+      <div class="sidebar__item" data-panel="inventario" onclick="showPanel('inventario')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        <span>Inventario</span>
+      </div>
+      <div class="sidebar__item" data-panel="redes" onclick="showPanel('redes')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2H3v16h5v4l4-4h5l4-4V2zm-10 9V7m5 4V7"/></svg>
+        <span>Redes Sociales</span>
+      </div>
+
+      <div class="sidebar__label">Sistema</div>
+      <div class="sidebar__item" data-panel="config" onclick="showPanel('config')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        <span>Configuración</span>
+      </div>
+    </nav>
+
+    <div class="sidebar__footer">
+      <div class="sidebar__user">Administrador</div>
+      <button class="sidebar__logout" onclick="adminLogout()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        <span>Cerrar sesión</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="admin-main">
+    <div class="admin-topbar">
+      <div class="topbar__title" id="topbarTitle">Dashboard</div>
+      <div class="topbar__right">
+        <span class="topbar__date" id="topbarDate"></span>
+        <a href="index.html" target="_blank" class="topbar__store-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          Ver tienda
+        </a>
+      </div>
+    </div>
+
+    <div class="admin-content">
+
+      <!-- ============ DASHBOARD ============ -->
+      <div class="panel active" id="panel-dashboard">
+        <p class="panel__title">Dashboard</p>
+
+        <div class="stat-cards">
+          <div class="stat-card">
+            <div class="stat-card__icon stat-card__icon--green">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2d7a2d" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+            </div>
+            <div class="stat-card__label">Pedidos este mes</div>
+            <div class="stat-card__value" id="statPedidosMes">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__icon stat-card__icon--yellow">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+            </div>
+            <div class="stat-card__label">Ingresos este mes</div>
+            <div class="stat-card__value" id="statIngresosMes">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__icon stat-card__icon--blue">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div class="stat-card__label">Pedidos pendientes</div>
+            <div class="stat-card__value" id="statPendientes">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__icon stat-card__icon--purple">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <div class="stat-card__label">Productos stock bajo</div>
+            <div class="stat-card__value" id="statStockBajo">—</div>
+          </div>
+        </div>
+
+        <div class="charts-row">
+          <div class="chart-card">
+            <div class="chart-card__title">📈 Ventas mensuales (últimos 6 meses)</div>
+            <div class="chart-wrap"><canvas id="ventasChart"></canvas></div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-card__title">💳 Métodos de pago</div>
+            <div class="chart-wrap"><canvas id="metodoChart"></canvas></div>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <div class="table-card__header">
+            <div class="table-card__title">Últimos pedidos</div>
+            <button class="btn-admin btn-admin--outline btn-admin--sm" onclick="showPanel('pedidos')">Ver todos →</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Código</th><th>Cliente</th><th>Barrio</th><th>Método</th><th>Total</th><th>Estado</th><th>Fecha</th></tr></thead>
+              <tbody id="recentPedidosTbody"><tr><td colspan="7" style="text-align:center;color:#aaa;padding:2rem">Cargando...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ PEDIDOS ============ -->
+      <div class="panel" id="panel-pedidos">
+        <p class="panel__title">Pedidos</p>
+        <div class="export-bar">
+          <input type="text" id="pedidoSearch" class="filter-input" placeholder="🔍 Buscar por código, cliente, barrio..." oninput="filterPedidos()" style="min-width:240px"/>
+          <select id="pedidoEstadoFilter" class="filter-input" onchange="filterPedidos()">
+            <option value="">Todos los estados</option>
+            <option value="pendiente">Pendiente</option>
+            <option value="confirmado">Confirmado</option>
+            <option value="enviado">Enviado</option>
+            <option value="entregado">Entregado</option>
+            <option value="cancelado">Cancelado</option>
+          </select>
+          <input type="month" id="pedidoMesFilter" class="filter-input" onchange="filterPedidos()" />
+          <button class="btn-admin btn-admin--outline btn-admin--sm" onclick="exportPedidosCSV()">⬇ Exportar CSV</button>
+          <button class="btn-admin btn-admin--outline btn-admin--sm" onclick="loadPedidos()">🔄 Actualizar</button>
+        </div>
+        <div class="table-card">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Código</th><th>Cliente</th><th>Dirección</th><th>Método</th><th>Total</th><th>Estado</th><th>Fecha</th><th></th></tr></thead>
+              <tbody id="pedidosTbody"><tr><td colspan="8" style="text-align:center;color:#aaa;padding:2rem">Cargando...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ INVENTARIO ============ -->
+      <div class="panel" id="panel-inventario">
+        <p class="panel__title">Inventario / Stock</p>
+        <div class="export-bar">
+          <input type="text" id="invSearch" class="filter-input" placeholder="🔍 Buscar producto..." oninput="filterInventario()" style="min-width:200px"/>
+          <select id="invCatFilter" class="filter-input" onchange="filterInventario()">
+            <option value="">Todas las categorías</option>
+            <option>Frutas</option><option>Verduras</option><option>Lácteos</option><option>Granos</option><option>Hierbas</option>
+          </select>
+          <button class="btn-admin btn-admin--primary btn-admin--sm" onclick="nuevoProducto()">+ Nuevo producto</button>
+          <button class="btn-admin btn-admin--outline btn-admin--sm" onclick="exportInventarioCSV()">⬇ Exportar CSV</button>
+          <button class="btn-admin btn-admin--outline btn-admin--sm" onclick="loadInventario()">🔄 Actualizar</button>
+        </div>
+        <div class="table-card">
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Producto</th><th>Categoría</th><th>Precio</th><th>Stock actual</th><th>Estado</th><th>Mínimo</th><th>Activo</th><th>Acciones</th></tr></thead>
+              <tbody id="inventarioTbody"><tr><td colspan="8" style="text-align:center;color:#aaa;padding:2rem">Cargando...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ REDES SOCIALES ============ -->
+      <div class="panel" id="panel-redes">
+        <p class="panel__title">Redes Sociales</p>
+
+        <div class="social-cards">
+          <div class="social-card">
+            <div class="social-card__header">
+              <div class="social-card__icon social-card__icon--ig">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              </div>
+              <div>
+                <div class="social-card__name">Instagram</div>
+                <div class="social-card__handle" id="igHandle">@colombiaverde</div>
+              </div>
+            </div>
+            <div class="social-card__actions">
+              <a href="#" id="igUrl" target="_blank" class="btn-admin btn-admin--primary btn-admin--sm">Abrir perfil</a>
+              <button class="btn-admin btn-admin--outline btn-admin--sm" onclick="document.getElementById('cfgInstagramUrl').focus();showPanel('redes')">Editar enlace</button>
+            </div>
+          </div>
+
+          <div class="social-card">
+            <div class="social-card__header">
+              <div class="social-card__icon social-card__icon--wa">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              </div>
+              <div>
+                <div class="social-card__name">WhatsApp Business</div>
+                <div class="social-card__handle" id="waHandle">300 123 4567</div>
+              </div>
+            </div>
+            <div class="social-card__actions">
+              <a href="#" id="waUrl" target="_blank" class="btn-admin btn-admin--primary btn-admin--sm">Abrir chat</a>
+              <button class="btn-admin btn-admin--outline btn-admin--sm" onclick="showPanel('config')">Editar número</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="social-config-form">
+          <h3>🔗 Configurar enlaces de redes sociales</h3>
+          <div class="admin-form-grid" style="margin-top:.8rem">
+            <div class="admin-form-group">
+              <label>URL de Instagram</label>
+              <input type="url" id="cfgInstagramUrl" placeholder="https://instagram.com/usuario" />
+            </div>
+            <div class="admin-form-group">
+              <label>Usuario de Instagram</label>
+              <input type="text" id="cfgInstagramUser" placeholder="colombiaverde" />
+            </div>
+            <div class="admin-form-group">
+              <label>Número WhatsApp (con código de país)</label>
+              <input type="text" id="cfgWhatsappNum" placeholder="573001234567" />
+            </div>
+            <div class="admin-form-group">
+              <label>URL WhatsApp</label>
+              <input type="url" id="cfgWhatsappUrl" placeholder="https://wa.me/573001234567" />
+            </div>
+          </div>
+          <div style="margin-top:1rem">
+            <button class="btn-admin btn-admin--primary" onclick="saveRedConfig()">Guardar cambios</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ CONFIGURACIÓN ============ -->
+      <div class="panel" id="panel-config">
+        <p class="panel__title">Configuración General</p>
+        <div class="table-card" style="padding:1.5rem">
+          <h3 style="font-size:.9rem;font-weight:700;margin-bottom:1.2rem;color:#1a2e1a">🏪 Datos de la tienda</h3>
+          <div class="admin-form-grid">
+            <div class="admin-form-group">
+              <label>Nombre de la tienda</label>
+              <input type="text" id="cfgTiendaNombre" placeholder="Manjares del Campo" />
+            </div>
+            <div class="admin-form-group">
+              <label>Ciudad de cobertura</label>
+              <input type="text" id="cfgCiudad" placeholder="Barranquilla" />
+            </div>
+            <div class="admin-form-group">
+              <label>Número Nequi</label>
+              <input type="text" id="cfgNequiNum" placeholder="3001234567" maxlength="10" />
+            </div>
+            <div class="admin-form-group">
+              <label>Número Daviplata</label>
+              <input type="text" id="cfgDaviNum" placeholder="3001234567" maxlength="10" />
+            </div>
+            <div class="admin-form-group admin-form-grid--full">
+              <label>Nueva contraseña de admin (dejar vacío para no cambiar)</label>
+              <input type="password" id="cfgAdminPass" placeholder="Nueva contraseña..." />
+            </div>
+          </div>
+          <div style="margin-top:1.2rem">
+            <button class="btn-admin btn-admin--primary" onclick="saveConfig()">Guardar configuración</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /admin-content -->
+  </div><!-- /admin-main -->
+</div><!-- /admin-layout -->
+
+<!-- ===== MODALES ADMIN ===== -->
+
+<!-- Detalle pedido -->
+<div class="admin-modal-overlay" id="pedidoDetailModal">
+  <div class="admin-modal">
+    <button class="admin-modal__close" onclick="closePedidoDetail()">✕</button>
+    <div class="admin-modal__title">Detalle del Pedido</div>
+    <div id="pedidoDetailContent"></div>
+  </div>
+</div>
+
+<!-- Editar / Crear producto -->
+<div class="admin-modal-overlay" id="editProductoModal">
+  <div class="admin-modal">
+    <button class="admin-modal__close" onclick="closeEditProducto()">✕</button>
+    <div class="admin-modal__title" id="editModalTitle">Editar Producto</div>
+    <input type="hidden" id="editProdId" />
+    <div class="admin-form-grid">
+      <div class="admin-form-group admin-form-grid--full">
+        <label>Nombre *</label>
+        <input type="text" id="editProdNombre" placeholder="Nombre del producto" />
+      </div>
+      <div class="admin-form-group">
+        <label>Categoría *</label>
+        <select id="editProdCategoria">
+          <option>Frutas</option><option>Verduras</option><option>Lácteos</option><option>Granos</option><option>Hierbas</option>
+        </select>
+      </div>
+      <div class="admin-form-group">
+        <label>Precio (COP) *</label>
+        <input type="number" id="editProdPrecio" placeholder="4500" min="0" />
+      </div>
+      <div class="admin-form-group">
+        <label>Unidad</label>
+        <select id="editProdUnidad">
+          <option value="und">und</option>
+          <option value="kg">kg</option>
+          <option value="lb">lb</option>
+          <option value="lt">lt</option>
+        </select>
+      </div>
+      <div class="admin-form-group">
+        <label>Badge</label>
+        <select id="editProdBadge">
+          <option value="">Sin badge</option>
+          <option value="FRESCO">FRESCO</option>
+          <option value="ORGÁNICO">ORGÁNICO</option>
+          <option value="LOCAL">LOCAL</option>
+          <option value="ARTESANAL">ARTESANAL</option>
+        </select>
+      </div>
+      <div class="admin-form-group">
+        <label>Stock actual</label>
+        <input type="number" id="editProdStock" placeholder="0" min="0" />
+      </div>
+      <div class="admin-form-group">
+        <label>Stock mínimo (alerta)</label>
+        <input type="number" id="editProdStockMin" placeholder="5" min="0" />
+      </div>
+      <div class="admin-form-group">
+        <label>Estado</label>
+        <select id="editProdActivo">
+          <option value="true">Activo (visible en tienda)</option>
+          <option value="false">Inactivo (oculto)</option>
+        </select>
+      </div>
+      <div class="admin-form-group admin-form-grid--full">
+        <label>URL imagen (Unsplash o propia)</label>
+        <input type="url" id="editProdImagen" placeholder="https://images.unsplash.com/..." />
+      </div>
+    </div>
+    <div class="admin-form-actions">
+      <button class="btn-admin btn-admin--outline" onclick="closeEditProducto()">Cancelar</button>
+      <button class="btn-admin btn-admin--primary" onclick="saveProducto()">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Ajuste de stock -->
+<div class="admin-modal-overlay" id="ajusteStockModal">
+  <div class="admin-modal">
+    <button class="admin-modal__close" onclick="closeAjusteStock()">✕</button>
+    <div class="admin-modal__title">Ajustar Stock</div>
+    <input type="hidden" id="ajusteStockId" />
+    <p style="font-size:.88rem;margin-bottom:1rem">
+      Producto: <strong id="ajusteStockNombre"></strong><br/>
+      Stock actual: <strong id="ajusteStockActual"></strong>
+    </p>
+    <div class="admin-form-grid">
+      <div class="admin-form-group">
+        <label>Tipo de movimiento</label>
+        <select id="ajusteTipo">
+          <option value="entrada">📦 Entrada (recibí mercancía)</option>
+          <option value="salida">📤 Salida (venta manual)</option>
+          <option value="ajuste">🔧 Ajuste directo (fijar cantidad)</option>
+        </select>
+      </div>
+      <div class="admin-form-group">
+        <label>Cantidad</label>
+        <input type="number" id="ajusteCantidad" placeholder="0" min="1" />
+      </div>
+      <div class="admin-form-group admin-form-grid--full">
+        <label>Motivo (opcional)</label>
+        <input type="text" id="ajusteMotivo" placeholder="Ej: Llegó nuevo pedido al proveedor" />
+      </div>
+    </div>
+    <div class="admin-form-actions">
+      <button class="btn-admin btn-admin--outline" onclick="closeAjusteStock()">Cancelar</button>
+      <button class="btn-admin btn-admin--primary" onclick="saveAjusteStock()">Aplicar</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="adminToast"></div>
+
+<script src="js/supabase.js"></script>
+<script src="js/admin.js"></script>
+<script>
+  document.getElementById('topbarDate').textContent = new Date().toLocaleDateString('es-CO', {
+    weekday:'long', year:'numeric', month:'long', day:'numeric'
+  });
+</script>
+</body>
+</html>

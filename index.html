@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manajares del Campo — Productos del Campo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ===================== NAVBAR ===================== -->
+<header class="navbar">
+  <div class="navbar__brand">
+    <div class="navbar__logo">CV</div>
+    <div class="navbar__brand-text">
+      <span class="navbar__name">Manjares del Campo</span>
+      <span class="navbar__sub">PRODUCTOS DEL CAMPO</span>
+    </div>
+  </div>
+  <nav class="navbar__nav">
+    <a href="#inicio"   class="navbar__link">INICIO</a>
+    <a href="#catalogo" class="navbar__link">CATÁLOGO</a>
+    <a href="#nosotros" class="navbar__link">NOSOTROS</a>
+    <a href="#contacto" class="navbar__link">CONTACTO</a>
+  </nav>
+  <div class="navbar__actions">
+    <a href="#" data-wa-link class="btn btn--whatsapp">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WHATSAPP
+    </a>
+    <button class="navbar__cart-btn" id="cartBtn">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span class="navbar__cart-count" id="cartCount">0</span>
+    </button>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="inicio">
+  <div class="hero__overlay"></div>
+  <div class="hero__content">
+    <div class="hero__badge">
+      <span class="hero__badge-dot"></span>
+      ENTREGA EN BARRANQUILLA Y ÁREA METROPOLITANA
+    </div>
+    <h1 class="hero__title">Del campo a tu mesa,<br/><em class="hero__title-em">frescos y naturales.</em></h1>
+    <p class="hero__desc">Conectamos productores del campo colombiano con tu hogar. Frutas, verduras, lácteos y granos frescos entregados en el día en Barranquilla.</p>
+    <div class="hero__actions">
+      <a href="#catalogo" class="btn btn--primary">VER CATÁLOGO →</a>
+      <a href="#nosotros" class="btn btn--outline">¿CÓMO FUNCIONA?</a>
+    </div>
+  </div>
+  <img class="hero__bg" src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=1400&q=80" alt="Mercado de frutas y verduras" />
+</section>
+
+<!-- ===================== STATS ===================== -->
+<div class="stats-bar">
+  <div class="stat"><span class="stat__num">+50</span><span class="stat__label">Productos frescos</span></div>
+  <div class="stat"><span class="stat__num">100%</span><span class="stat__label">Natural y orgánico</span></div>
+  <div class="stat"><span class="stat__num">1 día</span><span class="stat__label">Entrega garantizada</span></div>
+</div>
+
+<!-- ===================== CATEGORÍAS ===================== -->
+<section class="section" id="catalogo">
+  <div class="container">
+    <div class="section__header">
+      <div><p class="section__label">EXPLORA</p><h2 class="section__title">Categorías de productos</h2></div>
+      <a href="#catalogo" class="link-arrow">Ver todas →</a>
+    </div>
+    <div class="categories-grid" id="categoriesGrid">
+      <div style="grid-column:1/-1;text-align:center;padding:2rem;color:#aaa">Cargando categorías...</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PRODUCTOS ===================== -->
+<section class="section section--light">
+  <div class="container">
+    <div class="section__header">
+      <div><p class="section__label">LO MÁS PEDIDO</p><h2 class="section__title">Productos destacados</h2></div>
+      <a href="#catalogo" class="link-arrow">Ver catálogo →</a>
+    </div>
+    <div class="products-grid" id="productsGrid">
+      <div style="grid-column:1/-1;text-align:center;padding:2rem;color:#aaa">Cargando productos...</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== NOSOTROS ===================== -->
+<section class="section section--mint" id="nosotros">
+  <div class="container">
+    <div class="nosotros__intro">
+      <p class="section__label section__label--center">QUIÉNES SOMOS</p>
+      <h2 class="nosotros__title">Del campo colombiano<br/><em class="hero__title-em">directo a tu mesa.</em></h2>
+      <p class="nosotros__desc">Somos una tienda comprometida con llevar productos frescos y naturales del campo colombiano a los hogares de Barranquilla.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2d8c2d" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h3 class="feature-card__title">Directo del campo</h3>
+        <p class="feature-card__desc">Trabajamos con productores locales colombianos para traerte los productos más frescos sin intermediarios.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2d8c2d" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 5v3h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <h3 class="feature-card__title">Entrega el mismo día</h3>
+        <p class="feature-card__desc">Recibe tus productos frescos en la puerta de tu casa en Barranquilla y el área metropolitana.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2d8c2d" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+        <h3 class="feature-card__title">Pago fácil</h3>
+        <p class="feature-card__desc">Paga con Nequi o Daviplata sin complicaciones. Sin tarjetas ni registros obligatorios.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card__icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#2d8c2d" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+        <h3 class="feature-card__title">Calidad garantizada</h3>
+        <p class="feature-card__desc">Seleccionamos cada producto a mano. Si no estás satisfecho, te lo resolvemos por WhatsApp.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PAY BANNER ===================== -->
+<section class="pay-banner" id="contacto">
+  <div class="container pay-banner__inner">
+    <div class="pay-banner__text">
+      <h2 class="pay-banner__title">Paga fácil con Nequi o Daviplata</h2>
+      <p class="pay-banner__sub">Sin tarjetas ni complicaciones. Transfiere y envía el comprobante por WhatsApp.</p>
+    </div>
+    <div class="pay-banner__btns">
+      <button class="btn btn--pay" onclick="openPayModal('nequi')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        Nequi
+      </button>
+      <button class="btn btn--pay" onclick="openPayModal('daviplata')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+        Daviplata
+      </button>
+      <a href="#" data-wa-link class="btn btn--pay">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <div class="footer__logo-row">
+        <div class="navbar__logo">MC</div>
+        <div><div class="footer__brand-name">Manjares del Campo</div><div class="footer__brand-sub">PRODUCTOS DEL CAMPO</div></div>
+      </div>
+      <p class="footer__brand-desc">Llevamos lo mejor del campo colombiano a tu hogar en Barranquilla y su área metropolitana.</p>
+      <div class="footer__socials">
+        <a href="#" data-ig-link class="footer__social" aria-label="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="#" data-wa-link class="footer__social" aria-label="WhatsApp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer__col">
+      <h4 class="footer__col-title">PRODUCTOS</h4>
+      <ul class="footer__list"><li><a href="#">Frutas</a></li><li><a href="#">Verduras</a></li><li><a href="#">Lácteos</a></li><li><a href="#">Granos</a></li><li><a href="#">Hierbas</a></li></ul>
+    </div>
+    <div class="footer__col">
+      <h4 class="footer__col-title">INFORMACIÓN</h4>
+      <ul class="footer__list"><li><a href="#">Nosotros</a></li><li><a href="#">Cómo comprar</a></li><li><a href="#">Zonas de entrega</a></li><li><a href="#">Preguntas frecuentes</a></li></ul>
+    </div>
+    <div class="footer__col">
+      <h4 class="footer__col-title">CONTACTO</h4>
+      <ul class="footer__list footer__list--contact">
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Barranquilla, Colombia</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg> Nequi: 300 123 4567</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg> Daviplata: 300 123 4567</li>
+        <li><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967c-.273-.099-.471-.148-.67.15c-.197.297-.767.966-.94 1.164c-.173.199-.347.223-.644.075c-.297-.15-1.255-.463-2.39-1.475c-.883-.788-1.48-1.761-1.653-2.059c-.173-.297-.018-.458.13-.606c.134-.133.298-.347.446-.52c.149-.174.198-.298.298-.497c.099-.198.05-.371-.025-.52c-.075-.149-.669-1.612-.916-2.207c-.242-.579-.487-.5-.669-.51c-.173-.008-.371-.01-.57-.01c-.198 0-.52.074-.792.372c-.272.297-1.04 1.016-1.04 2.479c0 1.462 1.065 2.875 1.213 3.074c.149.198 2.096 3.2 5.077 4.487c.709.306 1.262.489 1.694.625c.712.227 1.36.195 1.871.118c.571-.085 1.758-.719 2.006-1.413c.248-.694.248-1.289.173-1.413c-.074-.124-.272-.198-.57-.347"/></svg> WhatsApp</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <p>© 2026 Manjares del Campo — Astrid Blanco. Todos los derechos reservados.</p>
+    <!-- ADMIN TRIGGER OCULTO -->
+    <button class="admin-trigger" onclick="window.location.href='admin.html'" title="">·····</button>
+  </div>
+</footer>
+
+<!-- ===================== CART DRAWER ===================== -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<aside class="cart-drawer" id="cartDrawer">
+  <div class="cart-drawer__header">
+    <div class="cart-drawer__title-row">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span>Tu carrito</span>
+    </div>
+    <button class="cart-drawer__close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-drawer__body" id="cartBody">
+    <div class="cart-empty" id="cartEmpty">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <p>Tu carrito está vacío</p>
+    </div>
+    <div id="cartItems"></div>
+  </div>
+  <div class="cart-drawer__footer">
+    <div class="cart-total-row">
+      <span class="cart-total-label">Total</span>
+      <span class="cart-total-val" id="cartTotal">$0</span>
+    </div>
+    <button class="btn btn--whatsapp btn--full" id="btnPedirWA">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      PEDIR POR WHATSAPP
+    </button>
+    <button class="cart-clear-btn" onclick="clearCart()">Vaciar carrito</button>
+  </div>
+</aside>
+
+<!-- ===================== MODAL PAGO ===================== -->
+<div class="modal-overlay" id="modalOverlay" onclick="handleModalOverlay(event)">
+  <div class="modal">
+    <button class="modal__close" onclick="closePayModal()">✕</button>
+    <div class="modal__header" id="modalHeader"></div>
+
+    <!-- ÉXITO -->
+    <div class="modal__success" id="modalSuccess" style="display:none">
+      <div class="modal__success-icon">✅</div>
+      <h3>¡Pedido registrado!</h3>
+      <p>Tu pedido fue guardado exitosamente.</p>
+      <div class="modal__success-code" id="successCode"></div>
+      <p style="font-size:.82rem;color:#888;margin-top:.5rem">Guarda este código. Recibirás confirmación por WhatsApp.</p>
+      <button class="btn btn--primary btn--full" onclick="closePayModal()" style="margin-top:1.2rem">Cerrar</button>
+    </div>
+
+    <!-- BODY -->
+    <div id="modalBody">
+      <div class="modal__amount" id="modalAmount"></div>
+
+      <!-- DATOS DEL CLIENTE -->
+      <div class="modal__cliente-form">
+        <h4>📦 Datos de entrega</h4>
+        <div class="form-grid">
+          <div class="form-group form-grid--full">
+            <label>Nombre completo *</label>
+            <input type="text" id="clienteNombre" placeholder="Tu nombre completo" autocomplete="name" />
+          </div>
+          <div class="form-group">
+            <label>Teléfono *</label>
+            <input type="tel" id="clienteTelefono" placeholder="300 000 0000" maxlength="10" oninput="this.value=this.value.replace(/\D/g,'')" />
+          </div>
+          <div class="form-group">
+            <label>Barrio / Municipio *</label>
+            <input type="text" id="clienteBarrio" placeholder="Ej: El Prado" list="barriosList" />
+            <datalist id="barriosList"></datalist>
+          </div>
+          <div class="form-group form-grid--full">
+            <label>Dirección de entrega *</label>
+            <input type="text" id="clienteDireccion" placeholder="Calle 50 #45-20, Apto 301" />
+          </div>
+        </div>
+      </div>
+
+      <!-- TABS PAGO -->
+      <div class="modal__tabs">
+        <button class="modal__tab active" onclick="switchModalTab('numero',this)">📱 Número</button>
+        <button class="modal__tab" onclick="switchModalTab('qr',this)">📷 QR</button>
+        <button class="modal__tab" onclick="switchModalTab('link',this)">🔗 Link</button>
+      </div>
+
+      <!-- Tab: Número -->
+      <div class="modal__tab-content active" id="tabNumero">
+        <p class="modal__hint">Transfiere exactamente el monto a este número y confirma tu pago:</p>
+        <div class="modal__number-box">
+          <span id="modalNumber">300 123 4567</span>
+          <button class="modal__copy-btn" onclick="copyPayNumber()">Copiar</button>
+        </div>
+        <button class="btn btn--primary btn--full" id="confirmPayBtn" onclick="confirmPayment()">
+          <span class="btn-text">Confirmar pago</span>
+          <span class="btn-spinner" style="display:none">⏳ Guardando...</span>
+        </button>
+      </div>
+
+      <!-- Tab: QR -->
+      <div class="modal__tab-content" id="tabQr">
+        <p class="modal__hint">Escanea este QR desde tu app para el monto exacto:</p>
+        <div class="modal__qr-wrap"><canvas id="qrCanvas" width="200" height="200"></canvas></div>
+        <p class="modal__qr-note">QR para el monto exacto de tu pedido</p>
+      </div>
+
+      <!-- Tab: Link -->
+      <div class="modal__tab-content" id="tabLink">
+        <p class="modal__hint">Abre directamente la app de pago en tu celular:</p>
+        <button class="btn btn--primary btn--full" onclick="openPayApp()" style="margin-bottom:.8rem">📲 Abrir app y pagar</button>
+        <a class="modal__store-link" id="storeLinkBtn" href="#" target="_blank">¿No tienes la app? <u>Descargar aquí</u></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="js/supabase.js"></script>
+<script src="js/data.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/payment.js"></script>
+<script src="js/app.js"></script>
+<script>
+  // Poblar datalist barrios
+  document.addEventListener('DOMContentLoaded', () => {
+    const dl = document.getElementById('barriosList');
+    if (dl) BARRIOS_BQ.forEach(b => { const o = document.createElement('option'); o.value = b; dl.appendChild(o); });
+  });
+</script>
+</body>
+</html>

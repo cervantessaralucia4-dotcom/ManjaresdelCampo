@@ -1,0 +1,136 @@
+# 🌿 Manjares del Campo — Guía de despliegue
+
+## Estructura del proyecto
+
+```
+Manjares del Campo/
+├── index.html              ← Tienda principal
+├── admin.html              ← Panel de administración
+├── vercel.json             ← Config de despliegue
+├── .env.example            ← Plantilla de variables de entorno
+├── css/
+│   ├── style.css           ← Estilos de la tienda
+│   └── admin.css           ← Estilos del panel admin
+├── js/
+│   ├── supabase.js         ← Cliente Supabase (⚠️ editar URL y KEY)
+│   ├── data.js             ← Datos y constantes
+│   ├── ui.js               ← Helpers de interfaz
+│   ├── cart.js             ← Lógica del carrito
+│   ├── payment.js          ← Pagos Nequi / Daviplata
+│   └── app.js              ← Inicialización de la tienda
+│   └── admin.js            ← Lógica del panel admin
+└── supabase/
+    └── schema.sql          ← Script de base de datos
+```
+
+---
+
+## ⚡ Paso 1 — Configurar Supabase
+
+1. Ve a [supabase.com](https://supabase.com) y crea una cuenta gratuita
+2. Crea un nuevo proyecto (elige región **South America**)
+3. Ve a **SQL Editor** y ejecuta el contenido de `supabase/schema.sql`
+4. Ve a **Settings > API** y copia:
+   - **Project URL** → `SUPABASE_URL`
+   - **anon public key** → `SUPABASE_ANON_KEY`
+
+5. Abre `js/supabase.js` y reemplaza:
+```js
+const SUPABASE_URL      = 'https://TU-PROYECTO.supabase.co';
+const SUPABASE_ANON_KEY = 'TU-ANON-KEY';
+```
+
+---
+
+## ⚡ Paso 2 — Desplegar en Vercel
+
+### Opción A: Desde GitHub (recomendado)
+1. Sube este proyecto a un repositorio de GitHub
+2. Ve a [vercel.com](https://vercel.com) y conecta tu cuenta de GitHub
+3. Importa el repositorio
+4. Vercel lo detecta como proyecto estático automáticamente
+5. Haz clic en **Deploy**
+
+### Opción B: Vercel CLI
+```bash
+npm i -g vercel
+vercel login
+vercel --prod
+```
+
+---
+
+## ⚡ Paso 3 — Configurar datos de pago
+
+Edita en Supabase > Table Editor > `configuracion`:
+
+| clave | valor |
+|-------|-------|
+| `whatsapp_numero` | `573XXXXXXXXX` |
+| `nequi_numero` | `3XXXXXXXXX` |
+| `daviplata_numero` | `3XXXXXXXXX` |
+| `admin_password` | `tu-contraseña-segura` |
+| `instagram_url` | `https://instagram.com/tu-usuario` |
+| `instagram_usuario` | `tu-usuario` |
+
+O bien, desde el panel admin > **Configuración**.
+
+---
+
+## 🔐 Acceso al panel admin
+
+- URL: `tu-dominio.vercel.app/admin.html`
+- El botón de acceso está **oculto en el footer** (5 puntos `·····`)
+- La contraseña por defecto es `admin2025` — **cámbiala inmediatamente**
+
+---
+
+## 📋 Funcionalidades del admin
+
+### Dashboard
+- Pedidos del mes, ingresos, pendientes, stock bajo
+- Gráfico de ventas últimos 6 meses
+- Gráfico de métodos de pago (Nequi / Daviplata / WhatsApp)
+
+### Pedidos
+- Listado completo con filtros por estado, mes y búsqueda
+- Cambio de estado directamente en la tabla
+- Ver detalle del pedido con datos del cliente
+- Contactar cliente directo por WhatsApp
+- Exportar a CSV
+
+### Inventario / Stock
+- Productos agrupados por categoría
+- Barra visual de stock con alertas (rojo/amarillo/verde)
+- Crear / editar productos
+- Ajustar stock (entrada, salida, ajuste directo)
+- Exportar a CSV
+
+### Redes Sociales
+- Configurar URL de Instagram y WhatsApp
+- Los botones de la tienda se actualizan automáticamente
+
+---
+
+## 🛒 Flujo del cliente
+
+1. Cliente agrega productos al carrito
+2. Abre pago (Nequi / Daviplata)
+3. **Llena datos de entrega**: nombre, teléfono, dirección, barrio
+4. Elige método: número, QR o link directo
+5. Confirma → el pedido se guarda en Supabase automáticamente
+6. El stock se descuenta en tiempo real
+7. El admin recibe el pedido en el panel
+
+---
+
+## 🔧 Personalización rápida
+
+| Qué cambiar | Dónde |
+|-------------|-------|
+| Logo y nombre | `index.html` línea 12 |
+| Imagen del hero | `index.html` — URL de Unsplash |
+| Productos | Supabase > tabla `productos` |
+| Contraseña admin | Supabase > tabla `configuracion` |
+| Números de pago | `js/payment.js` → `PAYMENT_CONFIG` |
+| Barrios sugeridos | `js/data.js` → `BARRIOS_BQ` |
