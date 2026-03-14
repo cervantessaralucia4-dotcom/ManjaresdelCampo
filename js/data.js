@@ -29,5 +29,5 @@ const BARRIOS_BQ = [
   'El Recreo','Las Delicias','San José','Ciudadela 20 de Julio',
   'Las Flores','La Playa','Centro','Rebolo','San Roque','El Silencio',
   'Riomar','El Golf','Villa Country','Los Alpes','Alameda del Rio',
-  'Barranquillita','La Loma','Portal del Genovés','Soledad','Malambo'
+  'Barranquillita','La Loma','Portal del Genovés','Soledad','Malambo','Galapa'
 ];
